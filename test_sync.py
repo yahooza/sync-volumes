@@ -61,9 +61,4 @@ def test_sync():
   shutil.rmtree(test_config['mount'], True)
 
 if __name__ == "__main__":
-
-  command = sys.argv[1]
-  if command == "sync":
-    sync()
-  elif command == "test":
-    test_sync()
+  test_sync()
