@@ -42,3 +42,28 @@ def sync(backup_config):
       output.append('Success: master > ' + master_active + ' => slave > ' + slave_active + ' sync')
 
   return "\n".join(output)
+
+def log(str):
+  print "sync: " + str
+
+def execute():
+  if len(sys.argv) <= 1:
+    log("What's going on? Config file is required.")
+    exit()
+
+  filename = sys.argv[1]
+  if not os.path.isfile(filename):
+    log(filename + " is not a real file. Try again.")
+    exit()
+
+  try:
+    with open(filename) as data:
+      config = json.load(data)
+  except Exception:
+    log(filename + " is not a valid JSON file.")
+    exit()
+
+  print(sync(config['storage']['sync']))
+
+if __name__ == "__main__":
+  execute()
