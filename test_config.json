@@ -1,0 +1,20 @@
+{
+  "mount": "/tmp/sync",
+  "actives": {
+    "Devastator" : [
+      "Scrapper",
+      "Hook",
+      "Bonecrusher",
+      "Longhaul",
+      "Mixmaster",
+      "Scavenger"
+    ],
+    "Voltron": [
+      "Black",
+      "Blue",
+      "Green",
+      "Red",
+      "Yellow"
+    ]
+  }
+}

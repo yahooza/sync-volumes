@@ -1,29 +1,11 @@
 #!/usr/bin/python
-import sys, os, subprocess, shutil, errno, datetime, unittest
+import sys, os, subprocess, shutil, errno, datetime, unittest, json
 import sync
 
 def test_sync():
 
-  test_config = {
-    "mount": "/tmp/sync",
-    "actives": {
-      "Devastator" : [
-        "Scrapper",
-        "Hook",
-        "Bonecrusher",
-        "Longhaul",
-        "Mixmaster",
-        "Scavenger"
-      ],
-      "Voltron": [
-        "Black",
-        "Blue",
-        "Green",
-        "Red",
-        "Yellow"
-      ]
-    }
-  }
+  with open('./test_config.json') as data:
+    test_config = json.load(data)
 
   if os.path.isdir(test_config['mount']):
     shutil.rmtree(test_config['mount'])
