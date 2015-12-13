@@ -7,24 +7,33 @@ import sys, os, subprocess, shutil, errno, json, datetime
  ##
 def sync(backup_config):
 
-  output = []
+  output  = []
+  if not backup_config['volumes']:
+    output.append('Error: volumes does not exist')
+    return
 
-  masters = backup_config['actives'].keys()
+  # "volumes" = {
+  #   "m": master",
+  #   "s": [
+  #     "slave1",
+  #     "slave2",
+  #     "slave3"
+  #   ]
+  # }
+  #
+  volumes = backup_config['volumes']
+  for volume in volumes:
 
-  for master in masters:
-
-    master_active = os.sep.join([backup_config['mount'], master])
-    if not os.path.exists(master_active):
-      output.append('Error: master > ' + master_active + ' does not exist')
+    master = volume["m"]
+    if not os.path.exists(master):
+      output.append('Error: master > ' + master + ' does not exist')
       continue
 
-    slaves = backup_config['actives'][master]
-
+    slaves = volume["s"]
     for slave in slaves:
 
-      slave_active = os.sep.join([backup_config['mount'], slave])
-      if not os.path.exists(slave_active):
-        output.append('Error: slave > ' + slave_active  + ' does not exist\n\n')
+      if not os.path.exists(slave):
+        output.append('Error: slave > ' + slave  + ' does not exist\n\n')
         continue
 
       cmd = ' '.join([
@@ -33,13 +42,13 @@ def sync(backup_config):
         ' --delete ',
         ' --size-only',
         # ' --exclude-from=' + cfg['rsync.exclude.file'],
-        master_active + '/',
-        slave_active + '/'
+        master + '/',
+        slave + '/'
       ])
 
       p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
       p_out = p.communicate()[0]+'\n';
-      output.append('Success: master > ' + master_active + ' => slave > ' + slave_active + ' sync')
+      output.append('Success: master > ' + master + ' => slave > ' + slave + ' sync')
 
   return "\n".join(output)
 
