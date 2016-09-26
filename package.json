@@ -1,0 +1,23 @@
+{
+  "name": "sync-volumes",
+  "version": "1.0.0",
+  "description": "How I keep multiple copies of my data in sync",
+  "main": "index.js",
+  "scripts": {
+    "test": "py.test test_sync.py"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yahooza/sync-volumes.git"
+  },
+  "keywords": [
+    "sync",
+    "backup"
+  ],
+  "author": "Walter Punsapy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yahooza/sync-volumes/issues"
+  },
+  "homepage": "https://github.com/yahooza/sync-volumes#readme"
+}
