@@ -72,7 +72,7 @@ def execute():
     log(filename + " is not a valid JSON file.")
     exit()
 
-  print(sync(config['storage']['sync']))
+  print(sync(config['sync']['storage']))
 
 if __name__ == "__main__":
   execute()
